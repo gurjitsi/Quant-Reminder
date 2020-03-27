@@ -55,6 +55,7 @@ class SetNotification {
 //        dateComponents.minute = Int(arrayTime[1])
 //        dateComponents.second = Int(arrayTime[2])
         
+        //values are hard coded 
         dateComponents.day = 21
         dateComponents.month = 3
         dateComponents.year = 2020
