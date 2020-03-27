@@ -72,21 +72,21 @@ struct FoldersView: View{
                 ForEach(lists, id: \.self) { list in
                     //diplay data into list view
                     NavigationLink(destination: RemindersView(getFolderId: String("\(list.id!)"))) {
-                    Text("\(list.title!)").font(.headline)
+                        Text("\(list.title!)").font(.headline)
                         
+                    }
+                } .onDelete { (indexSet) in
+                    for offset in indexSet {
+                        //delete row from list
+                        let list = self.lists[offset]
+                        self.moc.delete(list)
+                    }
+                    try? self.moc.save()
                 }
-            } .onDelete { (indexSet) in
-                for offset in indexSet {
-                    //delete row from list
-                    let list = self.lists[offset]
-                    self.moc.delete(list)
-                }
-                try? self.moc.save()
             }
-        }
         }.navigationBarBackButtonHidden(true)
-        .navigationBarTitle("Lists")
-        .navigationBarItems(trailing: EditButton()).font(Font.headline.weight(.semibold))
+            .navigationBarTitle("Lists")
+            .navigationBarItems(trailing: EditButton()).font(Font.headline.weight(.semibold))
     }
 }
 
@@ -150,48 +150,48 @@ struct RemindersView: View{
             }
             Section(header: Text("My Reminders").foregroundColor(Color.black)) {
                 ForEach(reminders.filter { return $0.folderId! == stringToUUID(input: self.getFolderId) }, id:\.self) { reminder in
-                HStack {
-                    Button(action: {
-                        
-                    }) {
-                        if(reminder.status == true) {
-                            Image(systemName: "checkmark.circle.fill").imageScale(.large).foregroundColor(Color.gray)
-                        } else {
-                            Image(systemName: "circle").imageScale(.large)
+                    HStack {
+                        Button(action: {
+                            
+                        }) {
+                            if(reminder.status == true) {
+                                Image(systemName: "checkmark.circle.fill").imageScale(.large).foregroundColor(Color.gray)
+                            } else {
+                                Image(systemName: "circle").imageScale(.large)
+                            }
+                        } .onTapGesture {
+                            var changeStatus: Bool
+                            if reminder.status == true {
+                                changeStatus = false
+                            } else {
+                                changeStatus = true
+                            }
+                            reminderCompleted(taskId: reminder.id!, astatus: changeStatus)
                         }
-                    } .onTapGesture {
-                        var changeStatus: Bool
                         if reminder.status == true {
-                            changeStatus = false
+                            Text("\(reminder.title!)").font(.headline).foregroundColor(Color.gray).strikethrough()
                         } else {
-                            changeStatus = true
+                            Text("\(reminder.title!)").font(.headline).foregroundColor(Color.black)
                         }
-                        reminderCompleted(taskId: reminder.id!, astatus: changeStatus)
-                    }
-                    if reminder.status == true {
-                        Text("\(reminder.title!)").font(.headline).foregroundColor(Color.gray).strikethrough()
-                    } else {
-                        Text("\(reminder.title!)").font(.headline).foregroundColor(Color.black)
-                    }
-                    
-                    Spacer()
-                    Button(action: {
                         
-                    }) {
-                        Image(systemName: "info.circle").imageScale(.large)
-                    } .onTapGesture {
-                        self.isReminderDetailShowing.toggle()
-                    } .sheet(isPresented: self.$isReminderDetailShowing) {
-                        ReminderDetailView(remId: reminder.id!,isReminderDetailShowing: self.$isReminderDetailShowing, remTitle: reminder.title!, remDesc: reminder.descrip!, remPriority: reminder.priority, remAlarm: reminder.reminder!,showReminderDetail: reminder.reminderStatus)
+                        Spacer()
+                        Button(action: {
+                            
+                        }) {
+                            Image(systemName: "info.circle").imageScale(.large)
+                        } .onTapGesture {
+                            self.isReminderDetailShowing.toggle()
+                        } .sheet(isPresented: self.$isReminderDetailShowing) {
+                            ReminderDetailView(remId: reminder.id!,isReminderDetailShowing: self.$isReminderDetailShowing, remTitle: reminder.title!, remDesc: reminder.descrip!, remPriority: reminder.priority, remAlarm: reminder.reminder!,showReminderDetail: reminder.reminderStatus)
+                        }
                     }
+                } .onDelete { (indexSet) in
+                    for offset in indexSet {
+                        let reminder = self.reminders[offset]
+                        self.moc.delete(reminder)
+                    }
+                    try? self.moc.save()
                 }
-            } .onDelete { (indexSet) in
-                for offset in indexSet {
-                    let reminder = self.reminders[offset]
-                    self.moc.delete(reminder)
-                }
-                try? self.moc.save()
-            }
             }
         }
         .navigationBarTitle("Reminders").foregroundColor(Color.red)
@@ -201,12 +201,12 @@ struct RemindersView: View{
 
 //change date to string
 func changeDateToString(adate: Date) -> String {
-        let adate =  adate
-        //let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d MMM y"
-        let result = formatter.string(from: adate)
-        return result
+    let adate =  adate
+    //let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "d MMM y"
+    let result = formatter.string(from: adate)
+    return result
 }
 
 //change string to UUID
@@ -239,15 +239,15 @@ func reminderCompleted(taskId: UUID, astatus: Bool) {
 //custom navigation button to lists view
 struct NavigationButtonItem: View {
     var body: some View {
-
-           Button(action: {
+        
+        Button(action: {
             
-           }){
+        }){
             NavigationLink(destination: FoldersView()) {
                 HStack {
                     Image(systemName: "chevron.left").imageScale(.medium).font(Font.title.weight(.semibold))
                     Text("Lists").font(.headline).fontWeight(.semibold)
-                    }
+                }
             }
         }
     }
@@ -275,72 +275,72 @@ struct ReminderDetailView: View{
     
     var body: some View{
         NavigationView {
-                List {
-                    Section {
-                        VStack {
-                            TextField("Title", text: $remTitle)
-                            Divider()
-                            TextField("Description", text: $remDesc)
-                        }.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)).accentColor(Color.red)
-                    }
-                    
-                    Section {
-                        VStack {
-                            HStack {
-                                Toggle(isOn: $showReminderDetail) {
-                                    Text("Reminder")
-                                    
-                                }
-                            }
-                                
-                                if showReminderDetail {
-                                    Divider()
-                                    //Text("\(reminderDate, formatter: dateFormatter)")
-                                    DatePicker("Alarm", selection: $remAlarm)
-                                    
-                                }
-                        }.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
-                    
-                    }
-                    
-                    Section {
-                        VStack {
-                            HStack {
-                                NavigationLink(destination: PriorityView(reminderPriority: $remPriority)) {
-                                    Text("Priority")
-                                    Spacer()
-                                    if remPriority == 0 {
-                                        Text("None").foregroundColor(Color.gray)
-                                    } else if remPriority == 1 {
-                                        Text("Low").foregroundColor(Color.gray)
-                                    } else if remPriority == 2 {
-                                        Text("Medium").foregroundColor(Color.gray)
-                                    } else {
-                                        Text("High").foregroundColor(Color.gray)
-                                    }
-                                    
-                                }
-                            }
-                            
-                        }.accentColor(Color.red)
-                    }
-                } .listStyle(GroupedListStyle())
-                    
-            .navigationBarTitle("Details", displayMode: .inline)
-            .navigationBarItems(trailing:
-                Button(action: {
-                    reminderDetailEdit(taskId: self.remId, aTitle: self.remTitle, aDesc: self.remDesc, aPriority: self.remPriority,aAlarmStatus: self.showReminderDetail,aAlarmDate: self.remAlarm)
-                    self.isReminderDetailShowing.toggle()
-                    if self.showReminderDetail {
-                        self.notificationManager.setPermissions()
-                        self.notificationManager.setNotification(aTitle: self.remTitle, aDesc: self.remDesc, aDate: self.remAlarm)
-                    }
-                }) {
-                    Text("Done").fontWeight(.semibold).foregroundColor(Color.red)
+            List {
+                Section {
+                    VStack {
+                        TextField("Title", text: $remTitle)
+                        Divider()
+                        TextField("Description", text: $remDesc)
+                    }.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)).accentColor(Color.red)
                 }
+                
+                Section {
+                    VStack {
+                        HStack {
+                            Toggle(isOn: $showReminderDetail) {
+                                Text("Reminder")
+                                
+                            }
+                        }
+                        
+                        if showReminderDetail {
+                            Divider()
+                            //Text("\(reminderDate, formatter: dateFormatter)")
+                            DatePicker("Alarm", selection: $remAlarm)
+                            
+                        }
+                    }.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                    
+                }
+                
+                Section {
+                    VStack {
+                        HStack {
+                            NavigationLink(destination: PriorityView(reminderPriority: $remPriority)) {
+                                Text("Priority")
+                                Spacer()
+                                if remPriority == 0 {
+                                    Text("None").foregroundColor(Color.gray)
+                                } else if remPriority == 1 {
+                                    Text("Low").foregroundColor(Color.gray)
+                                } else if remPriority == 2 {
+                                    Text("Medium").foregroundColor(Color.gray)
+                                } else {
+                                    Text("High").foregroundColor(Color.gray)
+                                }
+                                
+                            }
+                        }
+                        
+                    }.accentColor(Color.red)
+                }
+            } .listStyle(GroupedListStyle())
+                
+                .navigationBarTitle("Details", displayMode: .inline)
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        reminderDetailEdit(taskId: self.remId, aTitle: self.remTitle, aDesc: self.remDesc, aPriority: self.remPriority,aAlarmStatus: self.showReminderDetail,aAlarmDate: self.remAlarm)
+                        self.isReminderDetailShowing.toggle()
+                        if self.showReminderDetail {
+                            self.notificationManager.setPermissions()
+                            self.notificationManager.setNotification(aTitle: self.remTitle, aDesc: self.remDesc, aDate: self.remAlarm)
+                        }
+                    }) {
+                        Text("Done").fontWeight(.semibold).foregroundColor(Color.red)
+                    }
             )
-            }
-    
+        }
+        
     }
 }
 
@@ -373,22 +373,22 @@ struct PriorityView: View{
             }
         }.listStyle(GroupedListStyle())
             .navigationBarTitle("Priority", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: NavigationPrioritItem())
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: NavigationPrioritItem())
     }
 }
 
 struct NavigationPrioritItem: View {
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
-           Button(action: {
+        Button(action: {
             self.presentationMode.wrappedValue.dismiss()
-           }){
-                HStack {
-                    Image(systemName: "chevron.left").imageScale(.medium).font(Font.headline.weight(.semibold)).foregroundColor(Color.red)
-                    Text("Details").font(.headline).fontWeight(.semibold).foregroundColor(Color.red)
-                    }
+        }){
+            HStack {
+                Image(systemName: "chevron.left").imageScale(.medium).font(Font.headline.weight(.semibold)).foregroundColor(Color.red)
+                Text("Details").font(.headline).fontWeight(.semibold).foregroundColor(Color.red)
             }
+        }
     }
 }
 
