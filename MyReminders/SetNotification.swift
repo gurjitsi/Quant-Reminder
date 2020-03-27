@@ -35,27 +35,27 @@ class SetNotification {
         // show this notification five seconds from now
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
-//        let stringDate = decodeDate(getDate: aDate)
-//        let stringTime = decodeTime(getDate: aDate)
-//        let arrayDate = stringDate.components(separatedBy: "/")
-//        let arrayTime = stringTime.components(separatedBy: ":")
-//        let arrayAMPM = stringTime.components(separatedBy: " ")
-//        print("date \(arrayDate) \(arrayTime) \(arrayAMPM)")
+        //        let stringDate = decodeDate(getDate: aDate)
+        //        let stringTime = decodeTime(getDate: aDate)
+        //        let arrayDate = stringDate.components(separatedBy: "/")
+        //        let arrayTime = stringTime.components(separatedBy: ":")
+        //        let arrayAMPM = stringTime.components(separatedBy: " ")
+        //        print("date \(arrayDate) \(arrayTime) \(arrayAMPM)")
         
-//        print(stringDate + " " + stringTime)
-//
+        //        print(stringDate + " " + stringTime)
+        //
         var dateComponents = DateComponents()
         dateComponents.calendar = Calendar.current
         
-//        dateComponents.day = Int(arrayDate[1])
-//        dateComponents.month = Int(arrayDate[0])
-//        dateComponents.year = Int(arrayDate[2])
-//        //dateComponents.weekday = 3
-//        dateComponents.hour = Int(arrayTime[0])
-//        dateComponents.minute = Int(arrayTime[1])
-//        dateComponents.second = Int(arrayTime[2])
+        //        dateComponents.day = Int(arrayDate[1])
+        //        dateComponents.month = Int(arrayDate[0])
+        //        dateComponents.year = Int(arrayDate[2])
+        //        //dateComponents.weekday = 3
+        //        dateComponents.hour = Int(arrayTime[0])
+        //        dateComponents.minute = Int(arrayTime[1])
+        //        dateComponents.second = Int(arrayTime[2])
         
-        //values are hard coded 
+        //values are hard coded
         dateComponents.day = 21
         dateComponents.month = 3
         dateComponents.year = 2020
@@ -66,18 +66,18 @@ class SetNotification {
         
         // Create the trigger as a repeating event.
         let trigger = UNCalendarNotificationTrigger(
-                 dateMatching: dateComponents, repeats: false)
-
+            dateMatching: dateComponents, repeats: false)
+        
         // choose a random identifier
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
+        
         // add our notification request
         //UNUserNotificationCenter.current().add(request)
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.add(request) { (error) in
-           if error != nil {
-            print(error!)
-           }
+            if error != nil {
+                print(error!)
+            }
         }
     }
     
