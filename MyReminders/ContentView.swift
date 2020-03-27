@@ -13,6 +13,7 @@ import UserNotifications
 struct ContentView: View {
     var body: some View {
         NavigationView {
+            //set initial view with default folder id
             RemindersView(getFolderId: "4D7BC347-E708-453E-9C58-EBDF48FDB263")
         }.accentColor(Color.red)
     }
@@ -22,28 +23,36 @@ struct FoldersView: View{
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Lists.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Lists.displayOrder, ascending: false)]) var lists: FetchedResults<Lists>
+    //create variable for new list
     @State var newList = ""
+    //create variable to handle alert if empty
     @State var showingEmptyListAlert = false
     
     var body: some View{
         List{
             Section(header: Text("New List")) {
                 HStack {
+                    //set text field for new list
                     TextField("Title", text: $newList)
                     Button(action: {
                         
                     }) {
                         Image(systemName: "plus.circle.fill").imageScale(.large).foregroundColor(Color.red)
                     } .alert(isPresented: $showingEmptyListAlert) {
+                        //display alert if textfield is empty
                         Alert(title: Text("Alert"), message: Text("Please enter new list title."), dismissButton: .default(Text("OK")))
                     } .onTapGesture {
                         if (self.newList.isEmpty) {
+                            //change value to display alert view
                             self.showingEmptyListAlert.toggle()
                         } else {
+                            //get current date
                             let getDate = getCurrentDate()
                             let formatter = DateFormatter()
                             formatter.dateFormat = "d MMM y"
+                            //change string to date
                             let changedDate = formatter.date(from: getDate)
+                            //insert values into entity
                             let listContext = Lists(context: self.moc)
                             listContext.id = UUID()
                             listContext.title = "\(self.newList)"
@@ -56,16 +65,19 @@ struct FoldersView: View{
                 }
             }
             Section(header: Text("My Lists")) {
+                //navigation to list view
                 NavigationLink(destination: RemindersView(getFolderId: "4D7BC347-E708-453E-9C58-EBDF48FDB263")) {
                     Text("Default").font(.headline).foregroundColor(Color.gray)
                 }
                 ForEach(lists, id: \.self) { list in
+                    //diplay data into list view
                     NavigationLink(destination: RemindersView(getFolderId: String("\(list.id!)"))) {
                     Text("\(list.title!)").font(.headline)
                         
                 }
             } .onDelete { (indexSet) in
                 for offset in indexSet {
+                    //delete row from list
                     let list = self.lists[offset]
                     self.moc.delete(list)
                 }
@@ -78,6 +90,7 @@ struct FoldersView: View{
     }
 }
 
+//get current date
 func getCurrentDate() -> String {
     let today = Date()
     let formatter = DateFormatter()
@@ -86,6 +99,7 @@ func getCurrentDate() -> String {
     return date
 }
 
+//reminder view
 struct RemindersView: View{
     
     @State var newReminder = ""
@@ -185,6 +199,7 @@ struct RemindersView: View{
     }
 }
 
+//change date to string
 func changeDateToString(adate: Date) -> String {
         let adate =  adate
         //let date = Date()
@@ -194,11 +209,13 @@ func changeDateToString(adate: Date) -> String {
         return result
 }
 
+//change string to UUID
 func stringToUUID(input: String) -> UUID {
     let getInput = UUID(uuidString: input)!
     return getInput
 }
 
+//call this function when reminder completed
 func reminderCompleted(taskId: UUID, astatus: Bool) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
@@ -219,6 +236,7 @@ func reminderCompleted(taskId: UUID, astatus: Bool) {
     }
 }
 
+//custom navigation button to lists view
 struct NavigationButtonItem: View {
     var body: some View {
 
@@ -235,6 +253,7 @@ struct NavigationButtonItem: View {
     }
 }
 
+//sheet to display detail of reminder
 struct ReminderDetailView: View{
     
     var remId: UUID
@@ -373,6 +392,7 @@ struct NavigationPrioritItem: View {
     }
 }
 
+//edit reminder  detail
 func reminderDetailEdit(taskId: UUID, aTitle: String, aDesc: String, aPriority: Int16, aAlarmStatus: Bool,aAlarmDate: Date) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
