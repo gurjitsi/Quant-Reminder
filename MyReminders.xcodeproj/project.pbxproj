@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E208FEEC2424C89500829E39 /* MyReminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E208FEEC2424C89500829E39 /* Quant - Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quant - Reminder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E208FEEF2424C89500829E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E208FEF12424C89500829E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E208FEF42424C89500829E39 /* MyReminders.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyReminders.xcdatamodel; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		E208FEED2424C89500829E39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E208FEEC2424C89500829E39 /* MyReminders.app */,
+				E208FEEC2424C89500829E39 /* Quant - Reminder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,7 +98,7 @@
 			);
 			name = MyReminders;
 			productName = MyReminders;
-			productReference = E208FEEC2424C89500829E39 /* MyReminders.app */;
+			productReference = E208FEEC2424C89500829E39 /* Quant - Reminder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -302,7 +302,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gurjits.MyReminders;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Quant - Reminder";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -322,7 +322,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gurjits.MyReminders;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Quant - Reminder";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
