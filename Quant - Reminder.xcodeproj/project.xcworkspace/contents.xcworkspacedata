@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MyReminders.xcodeproj">
+      location = "self:/Users/gurjit/Documents/xcode/MyReminders/Quant - Reminder.xcodeproj">
    </FileRef>
 </Workspace>

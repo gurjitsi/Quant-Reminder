@@ -84,9 +84,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E208FEEB2424C89500829E39 /* MyReminders */ = {
+		E208FEEB2424C89500829E39 /* Quant - Reminder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E208FF032424C89600829E39 /* Build configuration list for PBXNativeTarget "MyReminders" */;
+			buildConfigurationList = E208FF032424C89600829E39 /* Build configuration list for PBXNativeTarget "Quant - Reminder" */;
 			buildPhases = (
 				E208FEE82424C89500829E39 /* Sources */,
 				E208FEE92424C89500829E39 /* Frameworks */,
@@ -96,7 +96,7 @@
 			);
 			dependencies = (
 			);
-			name = MyReminders;
+			name = "Quant - Reminder";
 			productName = MyReminders;
 			productReference = E208FEEC2424C89500829E39 /* Quant - Reminder.app */;
 			productType = "com.apple.product-type.application";
@@ -116,7 +116,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E208FEE72424C89500829E39 /* Build configuration list for PBXProject "MyReminders" */;
+			buildConfigurationList = E208FEE72424C89500829E39 /* Build configuration list for PBXProject "Quant - Reminder" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -129,7 +129,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E208FEEB2424C89500829E39 /* MyReminders */,
+				E208FEEB2424C89500829E39 /* Quant - Reminder */,
 			);
 		};
 /* End PBXProject section */
@@ -331,7 +331,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E208FEE72424C89500829E39 /* Build configuration list for PBXProject "MyReminders" */ = {
+		E208FEE72424C89500829E39 /* Build configuration list for PBXProject "Quant - Reminder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E208FF012424C89600829E39 /* Debug */,
@@ -340,7 +340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E208FF032424C89600829E39 /* Build configuration list for PBXNativeTarget "MyReminders" */ = {
+		E208FF032424C89600829E39 /* Build configuration list for PBXNativeTarget "Quant - Reminder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E208FF042424C89600829E39 /* Debug */,
