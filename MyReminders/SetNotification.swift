@@ -35,12 +35,12 @@ class SetNotification {
         // show this notification five seconds from now
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
-        //        let stringDate = decodeDate(getDate: aDate)
-        //        let stringTime = decodeTime(getDate: aDate)
-        //        let arrayDate = stringDate.components(separatedBy: "/")
-        //        let arrayTime = stringTime.components(separatedBy: ":")
-        //        let arrayAMPM = stringTime.components(separatedBy: " ")
-        //        print("date \(arrayDate) \(arrayTime) \(arrayAMPM)")
+                let stringDate = decodeDate(getDate: aDate)
+                let stringTime = decodeTime(getDate: aDate)
+                let arrayDate = stringDate.components(separatedBy: "/")
+                let arrayTime = stringTime.components(separatedBy: ":")
+                //let arrayAMPM = stringTime.components(separatedBy: " ")
+                //print("date \(arrayTime) \(arrayAMPM)")
         
         //        print(stringDate + " " + stringTime)
         //
@@ -51,14 +51,20 @@ class SetNotification {
         //        dateComponents.month = Int(arrayDate[0])
         //        dateComponents.year = Int(arrayDate[2])
         //        //dateComponents.weekday = 3
-        //        dateComponents.hour = Int(arrayTime[0])
-        //        dateComponents.minute = Int(arrayTime[1])
-        //        dateComponents.second = Int(arrayTime[2])
+                dateComponents.hour = Int(arrayTime[0])
+                dateComponents.minute = Int(arrayTime[1])
+                dateComponents.second = Int(arrayTime[2])
+        
+        let rDay = Int(arrayDate[1])
+        let rMonth = Int(arrayDate[0])
+        let rYear = Int("20" + arrayDate[2])
+        
+        print("day: \(String(describing: rDay)) month: \(String(describing: rMonth)) year: \(String(describing: rYear))")
         
         //values are hard coded
-        dateComponents.day = 21
-        dateComponents.month = 3
-        dateComponents.year = 2020
+        dateComponents.day = rDay
+        dateComponents.month = rMonth
+        dateComponents.year = rYear
         //dateComponents.weekday = 3
         dateComponents.hour = 20
         dateComponents.minute = 13
@@ -93,5 +99,18 @@ class SetNotification {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
         return formatter.string(from: time)
+    }
+    
+    func changeDateto24Format(date: String) {
+        
+        let dateAsString = date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        let date = dateFormatter.date(from: dateAsString)
+
+        dateFormatter.dateFormat = "HH:mm"
+        let date24 = dateFormatter.string(from: date!)
+        
+        print("\(date24)")
     }
 }
