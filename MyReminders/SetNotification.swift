@@ -32,43 +32,26 @@ class SetNotification {
         content.subtitle = aDesc
         content.sound = UNNotificationSound.default
         print("Alarm on")
-        // show this notification five seconds from now
-        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
-                let stringDate = decodeDate(getDate: aDate)
-                let stringTime = decodeTime(getDate: aDate)
-                let arrayDate = stringDate.components(separatedBy: "/")
-                let arrayTime = stringTime.components(separatedBy: ":")
-                //let arrayAMPM = stringTime.components(separatedBy: " ")
-                //print("date \(arrayTime) \(arrayAMPM)")
-        
-        //        print(stringDate + " " + stringTime)
-        //
+        let stringDate = decodeDate(getDate: aDate)
+        let arrayDate = stringDate.components(separatedBy: "/")
+        //change date to 24 format
+        let changedDate = changeDateto24Format(date: aDate)
+        let arrayChangedDate = changedDate.components(separatedBy: ":")
+        //date components
         var dateComponents = DateComponents()
         dateComponents.calendar = Calendar.current
-        
-        //        dateComponents.day = Int(arrayDate[1])
-        //        dateComponents.month = Int(arrayDate[0])
-        //        dateComponents.year = Int(arrayDate[2])
-        //        //dateComponents.weekday = 3
-                dateComponents.hour = Int(arrayTime[0])
-                dateComponents.minute = Int(arrayTime[1])
-                dateComponents.second = Int(arrayTime[2])
-        
+        //set hour and minute for reminder
+        dateComponents.hour = Int(arrayChangedDate[0])
+        dateComponents.minute = Int(arrayChangedDate[1])
+        //split date to day, month and year
         let rDay = Int(arrayDate[1])
         let rMonth = Int(arrayDate[0])
         let rYear = Int("20" + arrayDate[2])
-        
-        print("day: \(String(describing: rDay)) month: \(String(describing: rMonth)) year: \(String(describing: rYear))")
-        
-        //values are hard coded
+        //assign date components
         dateComponents.day = rDay
         dateComponents.month = rMonth
         dateComponents.year = rYear
-        //dateComponents.weekday = 3
-        dateComponents.hour = 20
-        dateComponents.minute = 13
-        //dateComponents.second = 0
         
         // Create the trigger as a repeating event.
         let trigger = UNCalendarNotificationTrigger(
@@ -101,16 +84,12 @@ class SetNotification {
         return formatter.string(from: time)
     }
     
-    func changeDateto24Format(date: String) {
+    func changeDateto24Format(date: Date) -> String {
         
-        let dateAsString = date
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        let date = dateFormatter.date(from: dateAsString)
-
         dateFormatter.dateFormat = "HH:mm"
-        let date24 = dateFormatter.string(from: date!)
-        
-        print("\(date24)")
+        let newDateString = dateFormatter.string(from: date)
+        print("New date from 12 hour: \(newDateString)")
+        return newDateString
     }
 }
