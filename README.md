@@ -13,7 +13,7 @@ Quant Reminder is an iOS application designed for setting and managing daily rem
 🔔 Notifications – Receive timely alerts for scheduled reminders (if implemented).
 <br/>
 🌙 Dark Mode Support – Enjoy a seamless experience in both light and dark mode.
-
+</p>
 <h3>🛠 Tech Stack</h3>
 <ul><li>
 Language: Swift</li>
