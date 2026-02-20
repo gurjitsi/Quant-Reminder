@@ -1,34 +1,53 @@
-<h3>⏰ Quant Reminder</h3>
-<p>
-Quant Reminder is an iOS application designed for setting and managing daily reminders, built using SwiftUI and Core Data. This lightweight and efficient app helps users stay organized by providing an intuitive interface for scheduling tasks and reminders.
-</p>
-<h3>🚀 Features</h3>
-<p>
-📝 Add, Edit & Delete Reminders – Easily create, modify, or remove daily reminders.
-<br/>
-📅 Persistent Storage – Uses Core Data to store reminders, ensuring data is saved even after app restarts.
-  <br/>
-🎨 SwiftUI Interface – A modern, smooth, and responsive UI built with SwiftUI.
-<br/>
-🔔 Notifications – Receive timely alerts for scheduled reminders (if implemented).
-<br/>
-🌙 Dark Mode Support – Enjoy a seamless experience in both light and dark mode.
-</p>
-<h3>🛠 Tech Stack</h3>
-<ul><li>
-Language: Swift</li>
-<li>Frameworks: SwiftUI, Core Data</li>
-<li>Platform: iOS</li></ul>
+# ⏰ Quant Reminder  
+_A minimalist iOS app for managing daily reminders, built with SwiftUI and Core Data._  
+
+![App Screenshot](https://user-images.githubusercontent.com/2215799/77860223-e9bb7180-7205-11ea-87d6-79e7acff1c5f.png)
+
+---
+
+## 🚀 About the Project  
+**Quant Reminder** is a sleek and efficient iOS application designed to help users manage their daily tasks and reminders.  
+Developed with **SwiftUI** and **Core Data**, it showcases modern iOS development practices focused on simplicity, persistence, and delightful user experience.  
+
+This project demonstrates proficiency in **state management, Core Data integration, and declarative UI design**, reflecting strong command of building functional, maintainable iOS apps using Apple’s latest frameworks.
+
+---
+
+## ✨ Core Features  
+- 📝 **Create, Edit & Delete Reminders:** Manage daily reminders with a single tap.  
+- 📅 **Persistent Storage:** Powered by **Core Data** to retain reminders even after restarts.  
+- 🎨 **Modern SwiftUI Interface:** A clean, dynamic layout optimized for responsiveness.  
+- 🔔 **Notifications (Optional):** Built-in support for local alerts and user notifications.  
+- 🌙 **Dark Mode Ready:** Fully adaptive design for both light and dark modes.  
+- ⚡ **Lightweight & Fast:** Focused on performance and minimal resource usage.  
+
+---
+
+## 🧰 Tech Stack  
+
+| Category | Technology |
+|-----------|-------------|
+| Language | Swift |
+| Frameworks | SwiftUI, Core Data |
+| Platform | iOS |
+| IDE | Xcode |
+| Persistence | Core Data |
+
+---
+
+## 🧪 Installation  
+
+1. Clone this repository:  
+   ```bash
+   git clone https://github.com/yourusername/Quant-Reminder.git
+   cd Quant-Reminder
+Open the project in Xcode.
+
+Build and run on your preferred simulator or iOS device.
 <h3>📸 Screenshots</h3>
 
 ![Group 2](https://user-images.githubusercontent.com/2215799/77860223-e9bb7180-7205-11ea-87d6-79e7acff1c5f.png)
 
-<h3>🚀 Installation</h3>
-<ul><li>
-Clone the repository</li>
-<li>cd Quant-Reminder</li>
-<li>Open QuantReminder.xcodeproj in Xcode.</li>
-<li>Build and run the app on a simulator or physical device.</li></ul>
 <h3>📜 License</h3>
 <p>
 This project is licensed under the MIT License – see the LICENSE file for details.</p>
