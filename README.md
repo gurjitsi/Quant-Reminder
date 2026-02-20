@@ -1,7 +1,5 @@
 # ⏰ Quant Reminder  
-_A minimalist iOS app for managing daily reminders, built with SwiftUI and Core Data._  
-
-![App Screenshot](https://user-images.githubusercontent.com/2215799/77860223-e9bb7180-7205-11ea-87d6-79e7acff1c5f.png)
+A minimalist iOS app for managing daily reminders, built with SwiftUI and Core Data.
 
 ---
 
